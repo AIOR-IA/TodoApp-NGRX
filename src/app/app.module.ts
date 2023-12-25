@@ -8,7 +8,8 @@ import { FooterComponent } from './footer/footer.component';
 
 // NGRX
 import { StoreModule } from '@ngrx/store';
-import { todoReducer } from './todos/todo.reducer';
+import { appReducers } from './app.reducer';
+
 // NGRX DEVTOOLS
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     AppRoutingModule,
     TodoModule,
-    StoreModule.forRoot({ todos: todoReducer }),
+    StoreModule.forRoot( appReducers ),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

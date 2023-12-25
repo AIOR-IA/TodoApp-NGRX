@@ -1,5 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 
+export const clearTodos = createAction(
+  '[TODO Component] clear todos'
+);
+
 export const create = createAction(
   '[TODO Component] create todo',
   props<{task: string}>(),
@@ -20,10 +24,11 @@ export const remove = createAction(
   props<{id: string}>(),
 );
 
-
 export const toggleAll = createAction(
   '[TODO Component] toggleAll todo',
   props<{completed: boolean}>(),
 );
+
+
 
 
