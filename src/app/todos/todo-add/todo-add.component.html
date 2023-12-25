@@ -1,12 +1,15 @@
 <header class="header" [formGroup]="myForm">
-  <h1>todos</h1>
-  <input
-    class="new-todo"
-    placeholder="What needs to be done?"
-    formControlName="task"
-    (keyup.enter)="onSave()"
-  >
+  <h1>todos - ngrx</h1>
   <div *ngIf="isValidField('task')" class="label-error">
     {{ getFieldError('task') }}
   </div>
+  <input
+    class="new-todo"
+    placeholder="What task needs to be done?"
+    formControlName="task"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (keyup.enter)="onSave()"
+  >
+
 </header>

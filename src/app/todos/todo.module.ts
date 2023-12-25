@@ -8,8 +8,6 @@ import { TodoPageComponent } from './todo-page/todo-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './pipe/filter.pipe';
 
-
-
 @NgModule({
   declarations: [
     TodoAddComponent,

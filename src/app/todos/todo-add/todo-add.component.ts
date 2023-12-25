@@ -1,5 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as actions from '../todo.action';
 import { AppState } from 'src/app/app.reducer';
@@ -13,10 +13,9 @@ export class TodoAddComponent {
 
   private fb = inject( FormBuilder );
   private store = inject( Store<AppState> );
+  isFieldInFocus: boolean = false;
 
-  constructor() {
-
-  }
+  constructor() {}
 
   myForm: FormGroup = this.fb.group({
     task: ['', [Validators.required, Validators.minLength(5)]],
@@ -33,7 +32,8 @@ export class TodoAddComponent {
 
   isValidField( field: string ): boolean | null {
     return this.myForm.controls[field].errors
-      && this.myForm.controls[field].touched;
+      && this.myForm.controls[field].touched
+      && !this.isFieldInFocus;
   }
 
   getFieldError( field: string ): string | null{
@@ -50,5 +50,13 @@ export class TodoAddComponent {
       }
     }
     return null;
+  }
+
+  onFocus() {
+    this.isFieldInFocus = false;
+  }
+
+  onBlur() {
+    this.isFieldInFocus = true;
   }
 }

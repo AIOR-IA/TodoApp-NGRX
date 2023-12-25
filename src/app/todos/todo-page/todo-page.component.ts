@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import * as actions from '../todo.action';
@@ -8,16 +8,13 @@ import * as actions from '../todo.action';
   templateUrl: './todo-page.component.html',
   styleUrls: ['./todo-page.component.css']
 })
-export class TodoPageComponent implements OnInit {
+export class TodoPageComponent {
 
   private store = inject( Store<AppState>);
 
   constructor() { }
 
   isCompleted: boolean = false;
-
-  ngOnInit(): void {
-  }
 
   toggleAll() {
     this.isCompleted = !this.isCompleted;

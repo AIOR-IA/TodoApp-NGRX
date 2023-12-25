@@ -1,0 +1,20 @@
+.selected {
+  background-color: #e1202a;
+  color: whitesmoke;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+}
+.clear-completed{
+  border: 1px solid transparent;
+  padding: 3px 7px;
+
+}
+.clear-completed:hover {
+  text-decoration: none;
+  border-radius: 3px;
+
+}
