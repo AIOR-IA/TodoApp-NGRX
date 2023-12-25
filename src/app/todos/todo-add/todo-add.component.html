@@ -1,1 +1,12 @@
-<p>todo-add works!</p>
+<header class="header" [formGroup]="myForm">
+  <h1>todos</h1>
+  <input
+    class="new-todo"
+    placeholder="What needs to be done?"
+    formControlName="task"
+    (keyup.enter)="onSave()"
+  >
+  <div *ngIf="isValidField('task')" class="label-error">
+    {{ getFieldError('task') }}
+  </div>
+</header>

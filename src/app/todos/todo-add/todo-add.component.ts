@@ -1,15 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as actions from '../todo.action';
+import { AppState } from 'src/app/app.reducer';
 
 @Component({
   selector: 'app-todo-add',
   templateUrl: './todo-add.component.html',
   styleUrls: ['./todo-add.component.css']
 })
-export class TodoAddComponent implements OnInit {
+export class TodoAddComponent {
 
-  constructor() { }
+  private fb = inject( FormBuilder );
+  private store = inject( Store<AppState> );
 
-  ngOnInit(): void {
+  constructor() {
+
   }
 
+  myForm: FormGroup = this.fb.group({
+    task: ['', [Validators.required, Validators.minLength(5)]],
+  })
+
+  onSave() {
+    if( this.myForm.invalid ) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
+    this.store.dispatch( actions.create( { task: this.myForm.value.task } ) )
+    this.myForm.reset({ task: ''})
+  }
+
+  isValidField( field: string ): boolean | null {
+    return this.myForm.controls[field].errors
+      && this.myForm.controls[field].touched;
+  }
+
+  getFieldError( field: string ): string | null{
+    if( !this.myForm.controls[field] ) return null;
+
+    const errors = this.myForm.controls[field].errors || {};
+
+    for (const key of Object.keys(errors)) {
+      switch( key) {
+        case 'required':
+          return `This field ${ field } is required`
+        case 'minlength':
+          return `Min ${ errors['minlength'].requiredLength } characters`;
+      }
+    }
+    return null;
+  }
 }

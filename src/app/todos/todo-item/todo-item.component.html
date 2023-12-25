@@ -1,1 +1,19 @@
-<p>todo-item works!</p>
+<li
+  [class.completed]="todo.completed"
+  [class.editing]="editing" [formGroup]="myForm">
+  <div class="view">
+    <input
+      class="toggle"
+      type="checkbox"
+      formControlName="isCompleted">
+    <label (dblclick)="edit()">{{ todo.task }}</label>
+    <button class="destroy" (click)="removeTodo()"></button>
+  </div>
+  <input
+    class="edit"
+    type="text"
+    formControlName="text"
+    #inputCheck
+    (blur)="finishEdit()"
+    >
+</li>
